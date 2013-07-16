@@ -400,29 +400,41 @@ if (!class_exists("sc_simple_meta_tags"))
 				
 		function titll()
 		{
-			//if (!strstr(ob_get_contents(), '</title>') || strstr(ob_get_contents(), '<!--<title>') )
-			//lets turn on the title function in any case :)
-			if ('a'=='a')
-			{
-						//lets remove the current, whatever title is inside the site already
-						
-						//clear & change the output
-						$startt= preg_replace('/\<title\>(.*?)\<\/title\>/s','',ob_get_contents());
-						ob_get_clean();	
-						
-						echo $startt;
-						
-						echo '<title>';
-							if		(is_home())			{echo bloginfo('name');}
-							elseif	(is_single())		{echo the_title();}
-							elseif	(is_page())			{echo the_title();}
-							elseif	(is_category())		{echo single_cat_title( $prefix, $display );}
-							elseif	(is_404())			{echo the_title();}
-							else						{echo the_title().' - '. bloginfo('name');}
-						echo '</title>';
-						//then the site continues other output
+		global $wpdb;
+		global $post;
+			/* removed - if (!strstr(ob_get_contents(), '</title>') || strstr(ob_get_contents(), '<!--<title>') ) */
+			
+					//lets remove the current, whatever title is inside the site already
+					$startt= preg_replace('/\<title\>(.*?)\<\/title\>/s','',ob_get_contents());
+					ob_get_clean();	
 
-			} 
+					echo $startt;
+					//then the site continues other output
+					
+			
+			
+			$meta_title=get_post_meta($post->ID, '_sc_m_title', true); 
+			if ($meta_title =='')
+			{
+				if(is_page()||is_home())	{$meta_title=get_option('page_meta_title');}
+				if(is_single())				{$meta_title=get_option('post_meta_title');}
+			}
+			
+			// if the title field box was not filled by user :		
+			if ($meta_title=='') 
+			{	echo '<title>';			
+					if		(is_home())			{echo bloginfo('name');}
+					elseif	(is_single())		{echo the_title();}
+					elseif	(is_page())			{echo the_title();}
+					elseif	(is_category())		{echo single_cat_title( $prefix, $display );}
+					elseif	(is_404())			{echo bloginfo('name');}
+					else						{echo the_title().' - '. bloginfo('name');}
+				echo '</title>';	
+			}
+			else
+			{
+				echo '<title>'.$meta_title.'</title>';
+			}
 		}	
 		
 		//       END OF TITLECEATOR BLOCK
