@@ -23,7 +23,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
     
 */
-
+global $wpdb;
 
 class Meta_Manager {
 	var $default = array(
@@ -64,8 +64,6 @@ function taxonomy_update_hooks() {
 	$taxonomies = get_taxonomies( array( 'public' => true, 'show_ui' => true ) );
 	if ( ! empty( $taxonomies ) ) {
 		foreach ( $taxonomies as $taxonomy ) {
-			add_action( $taxonomy . '_add_form_fields', array( $this, 'add_keywords_form' ) );
-			add_action( $taxonomy . '_edit_form_fields', array( &$this, 'edit_keywords_form' ), 0, 2 );
 			add_action( 'created_' . $taxonomy, array( &$this, 'update_term_meta' ) );
 			add_action( 'edited_' . $taxonomy, array( &$this, 'update_term_meta' ) );
 			add_action( 'delete_' . $taxonomy, array( &$this, 'delete_term_meta' ) );
@@ -103,32 +101,7 @@ function deactivation() {
 }
 
 
-function add_keywords_form() {
-?>
-<div class="form-field">
-	<label for="meta_keywords">Meta keywords</label>
-	<textarea name="meta_keywords" id="meta_keywords" rows="3" cols="40"></textarea>
-</div>
-<div class="form-field">
-	<label for="meta_description">Meta description</label>
-	<textarea name="meta_description" id="meta_description" rows="5" cols="40"></textarea>
-</div>
-<?php
-}
 
-
-function edit_keywords_form( $tag ) {
-?>
-	<tr class="form-field">
-		<th scope="row" valign="top"><label for="meta_keywords">Meta keywords</label></th>
-		<td><input type="text" name="meta_keywords" id="meta_keywords" size="40" value="<?php echo isset( $this->term_keywords[$tag->term_id] ) ? esc_html( $this->term_keywords[$tag->term_id] ) : ''; ?>" />
-	</tr>
-	<tr class="form-field">
-		<th scope="row" valign="top"><label for="meta_description">Meta description</label></th>
-		<td><textarea name="meta_description" id="meta_description" cols="40" rows="5"><?php echo isset( $this->term_description[$tag->term_id] ) ? esc_html( $this->term_description[$tag->term_id] ) : ''; ?></textarea>
-	</tr>
-<?php
-}
 
 
 function update_term_meta( $term_id ) {
@@ -384,9 +357,11 @@ $meta_manager = new Meta_Manager;
 if (!class_exists("sc_simple_meta_tags")) 
 	{
 
-	class sc_simple_meta_tags{
+	class sc_simple_meta_tags
+	{
 		//the constructor that initializes the class
-		function sc_simple_meta_tags() {
+		function sc_simple_meta_tags() 
+		{
 		}
 		
 		function sc_save_wonderful_metas($post_id) {
@@ -400,63 +375,7 @@ if (!class_exists("sc_simple_meta_tags"))
 		}
 		
 		
-		
-//       START OF TITLECEATOR BLOCK	
-
-
-				
-		function sc_show_on_website()
-		{
-			global $post;
-			
-			// if the title is not appearing in the current page's source, then it means, that the plugin should generate a <title> tag.	
-			if (!strstr(ob_get_contents(), '</title>') || strstr(ob_get_contents(), '<!--<title>') )
-		{
-
-			if(!is_404()){
-				$isImplemeted = false;
-				$meta_title = "";
-		
-				if(is_page()||is_home()){
-					if(get_option('use_pages_meta_data')=='on'){
-						$isImplemeted = true;
-						$meta_title = (get_post_meta($post->ID, '_sc_m_title', true)!='') ? get_post_meta($post->ID, '_sc_m_title', true) : get_option('page_meta_title');
-					}
-				}
-				
-				if(is_single()){
-					if(get_option('use_posts_meta_data')=='on'){
-						$isImplemeted = true;
-						$meta_title = (get_post_meta($post->ID, '_sc_m_title', true)!='') ? get_post_meta($post->ID, '_sc_m_title', true) : get_option('post_meta_title');
-					}
-				}
-
-				if($isImplemeted){
-					if($meta_title!=''){
-						echo '<title>' . htmlentities(stripslashes($meta_title),ENT_COMPAT,"UTF-8") . '</title>' . "\n";
-					}else{
-						echo '<title>';
-		if ( is_home()) {echo bloginfo('name') . wp_title();}
-		elseif (is_single()) {echo the_title();}
-		elseif (is_page()) {echo the_title();}
-		elseif (is_category()) {echo single_cat_title( $prefix, $display );}
-						echo '</title>';
-					}
-				}else{
-					echo '<title>'. (get_bloginfo('name','display') . wp_title(' | ',false)) .'</title>';
-				}
-			}
-		} else {echo '';} // page already contains </title> tag, so do nothing :)
-			
-			
-			
-			
-			
-		}	
-		
-		//       END OF TITLECEATOR BLOCK
-		
-		
+	
 	}
 	
 	//initialize the class to a variable
@@ -466,7 +385,7 @@ if (!class_exists("sc_simple_meta_tags"))
 		global $post;
 		?>
 		<b>Meta Title</b><br />
-		<i style="color:red;">Note: If your theme (header.php or else) already contains &lt;title&gt; then this plugins plugin's ability cant be used, because the plugin checks and sees, if &lt;title&gt; is already in the page's source. so, if you want to use this title field, then you should remove/uncomment &lt;title&gt;xxxxx&lt;/title&gt; code theme. after removing that, you will be able to set each post/page title field individually. (if you leave that field empty, then plugin automatically generates the title according to the post title).</i>
+		<i style="color:red;">Note: If your theme or other plugin generated the titles, then they will be abolished, and this plugin will set the title. (if you leave this field empty, then the title will be automatically set according to the post title).</i>
 		
 
 		<input type="text" size="100" id="scmetatitle" name="scmetatitle" value="<?php echo get_post_meta($post->ID, '_sc_m_title', true); ?>" />
@@ -474,11 +393,48 @@ if (!class_exists("sc_simple_meta_tags"))
 		<?php
 	}
 	
+		
+//       START OF TITLECEATOR BLOCK	
+
+
+				
+		function titll()
+		{
+			//if (!strstr(ob_get_contents(), '</title>') || strstr(ob_get_contents(), '<!--<title>') )
+			//lets turn on the title function in any case :)
+			if ('a'=='a')
+			{
+						//lets remove the current, whatever title is inside the site already
+						
+						//clear & change the output
+						$startt= preg_replace('/\<title\>(.*?)\<\/title\>/s','',ob_get_contents());
+						ob_get_clean();	
+						
+						echo $startt;
+						
+						echo '<title>';
+							if		(is_home())			{echo bloginfo('name');}
+							elseif	(is_single())		{echo the_title();}
+							elseif	(is_page())			{echo the_title();}
+							elseif	(is_category())		{echo single_cat_title( $prefix, $display );}
+							elseif	(is_404())			{echo the_title();}
+							else						{echo the_title().' - '. bloginfo('name');}
+						echo '</title>';
+						//then the site continues other output
+
+			} 
+		}	
+		
+		//       END OF TITLECEATOR BLOCK
+		
+		
+		
+		
 	//Actions and Filters	
 	if (isset($sc_meta_var)) {
 		//Actions
 		add_action("save_post",array(&$sc_meta_var,'sc_save_wonderful_metas'));
-		add_action("wp_head",array(&$sc_meta_var,'sc_show_on_website'));
+		add_action("wp_head",'titll');
 		add_action('admin_init', 'register_default_meta_settings' );
 		add_action('admin_menu', 'sc_add_wonder_box');
 		
