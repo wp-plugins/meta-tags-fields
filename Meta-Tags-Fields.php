@@ -2,7 +2,7 @@
 /*
 Plugin Name: Meta Tags fields
 Description: The plugin adds Meta Title+Description+Keywords fields to the post/page.
-Version: 1.1
+Version: 1.2
 Author: Plugin is based on the work of Hotscot and Hitoshi Omagari
 Author URI: http://www.warna.info/
 Plugin URI: http://www.warna.info/
@@ -121,20 +121,23 @@ function update_term_meta( $term_id ) {
 
 
 function add_post_meta_box(  $post_type, $post ) {
-	add_meta_box( 'post_meta_box', '__', array( &$this, 'post_meta_box' ), $post_type, 'normal', 'high');
+	add_meta_box( 'post_metaa_box', '__', array( &$this, 'post_metaa_box' ), $post_type, 'normal', 'high');
 }
 
 
-function post_meta_box() {
+function post_metaa_box() {
 	global $post;
 	$post_keywords = get_post_meta( $post->ID, '_keywords', true ) ? get_post_meta( $post->ID, '_keywords', true ) : '';
 	$post_description = get_post_meta( $post->ID, '_description', true ) ? get_post_meta( $post->ID, '_description', true ) : '';
 ?>
+<i style="color:red;">(if you leave these fields empty, then they will be automatically set according to the post).</i>
 <dl>
-	<dt>Meta keywords</dt>
-	<dd><input type="text" name="_keywords" id="post_keywords" size="100" value="<?php echo esc_html( $post_keywords ); ?>" /></dd>
-	<dt>Meta description</dt>
+	<dt><b>Meta description</b></dt>
 	<dd><textarea name="_description" id="post_description" cols="100" rows="3"><?php echo esc_html( $post_description ); ?></textarea></dd>
+	<dt><b>Meta keywords</b></dt>
+	<dd><input type="text" name="_keywords" id="post_keywords" size="100" value="<?php echo esc_html( $post_keywords ); ?>" /></dd>
+	<dt><b>Meta Title</b> (If your theme, or other plugin generates a title, then this plugin' will replace those titles.)</dt>
+	<dd><input type="text" size="100" id="scmetatitle" name="scmetatitle" value="<?php echo get_post_meta($post->ID, '_sc_m_title', true); ?>" /></dd>
 </dl>
 <?php
 }
@@ -381,18 +384,6 @@ if (!class_exists("sc_simple_meta_tags"))
 	//initialize the class to a variable
 	$sc_meta_var = new sc_simple_meta_tags();
 	
-	function sc_create_wonder_form(){
-		global $post;
-		?>
-		<b>Meta Title</b><br />
-		<i style="color:red;">Note: If your theme or other plugin generated the titles, then they will be abolished, and this plugin will set the title. (if you leave this field empty, then the title will be automatically set according to the post title).</i>
-		
-
-		<input type="text" size="100" id="scmetatitle" name="scmetatitle" value="<?php echo get_post_meta($post->ID, '_sc_m_title', true); ?>" />
-		<br /><br />
-		<?php
-	}
-	
 		
 //       START OF TITLECEATOR BLOCK	
 
@@ -451,13 +442,15 @@ if (!class_exists("sc_simple_meta_tags"))
 		add_action('admin_menu', 'sc_add_wonder_box');
 		
 		function sc_add_wonder_box() {						
-		    if( function_exists( 'add_meta_box' )) {
+		    /*
+			if( function_exists( 'add_meta_box' )) {
 				add_meta_box( 'MetaTagsPlugin', '__', 'sc_create_wonder_form', 'page', 'advanced', 'high' );
 				add_meta_box( 'MetaTagsPlugin', '__', 'sc_create_wonder_form', 'post', 'advanced', 'high' );
 		    }else{
 				add_action('dbx_post_advanced', 'sc_create_wonder_form' );
 				add_action('dbx_page_advanced', 'sc_create_wonder_form' );
 		    }
+			*/
 		}
 	}
 	
