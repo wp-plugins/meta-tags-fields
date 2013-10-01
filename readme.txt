@@ -1,0 +1,53 @@
+=== Meta Tags fields ===
+Contributors: jim912
+Donate link: http://blabla.com
+Tags: meta,tags,description,keywords
+Requires at least: 3.0
+Tested up to: 3.3.1
+Stable tag: 1.2 
+
+
+The plugin adds Meta Title+Description+Keywords fields to the post/page. This is the mix of Simple Meta Tags and Meta Manager, because "Simple Meta Tags" doesnt create default descriptions.  (Read our NOTES about ini_set)
+
+== Description ==
+
+
+While publishing a post/page, you can set:
+a) meta-description tag (if you leave that field empty, then the meta-description will use the first ~50 words of a post.) 
+b) meta-keywords (if you leave it empty, then it wont be filled automatically)
+c) meta "TITLE" .
+
+__Notes about ini_set:
+when using php header commands, such as ini_set or etc... there may be problems in the page's cource code, as the title sections may be double outputed. so, be adviced..
+== Installation ==
+ 
+ 
+1) Unpack
+2) upload to Wordpress plugins folder
+3) Activate from Admin menu
+
+
+
+== Frequently Asked Questions ==
+Does it add meta TITLE?
+- Yes
+
+
+== Changelog ==
+
+= 0.1 = 
+
+the first version of English Meta Manager.
+
+
+== Upgrade Notice == 
+nothin to upgrate.
+
+
+== Screenshots == 
+not available
+
+
+
+
+
