@@ -18,7 +18,7 @@ b) meta-keywords (if you leave it empty, then it wont be filled automatically)
 c) meta "TITLE" .
 
 __Notes about ini_set:
-when using php header commands, such as ini_set or etc... there may be problems in the page's cource code, as the title sections may be double outputed. so, be adviced..
+when using php header commands, such as ini_set or etc... there may be problems in the page's output's source code, as the header or title blocks may be double outputed. so, be adviced..
 == Installation ==
  
  
