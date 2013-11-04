@@ -133,11 +133,13 @@ function post_metaa_box() {
 <i style="color:red;">(if you leave these fields empty, then they will be automatically set according to the post).</i>
 <dl>
 	<dt><b>Meta description</b></dt>
-	<dd><textarea name="_description" id="post_description" cols="100" rows="3"><?php echo esc_html( $post_description ); ?></textarea></dd>
+	<dd><textarea name="_description" id="post_description" cols="60" rows="3"><?php echo esc_html( $post_description ); ?></textarea></dd>
 	<dt><b>Meta keywords</b></dt>
-	<dd><input type="text" name="_keywords" id="post_keywords" size="100" value="<?php echo esc_html( $post_keywords ); ?>" /></dd>
-	<dt><b>Meta Title</b> (If your theme, or other plugin generates a title, then this plugin' will replace those titles.)</dt>
-	<dd><input type="text" size="100" id="scmetatitle" name="scmetatitle" value="<?php echo get_post_meta($post->ID, '_sc_m_title', true); ?>" /></dd>
+	<dd><input type="text" name="_keywords" id="post_keywords" size="60" value="<?php echo esc_html( $post_keywords ); ?>" /></dd>
+	<div id="metatitllee">
+		<dt><b>Meta Title</b> (If your theme, or other plugin generates a title, then this plugin' will replace those titles.)</dt>
+		<dd><input type="text" size="60" id="scmetatitle" name="scmetatitle" value="<?php echo get_post_meta($post->ID, '_sc_m_title', true); ?>" /></dd>
+	</div>
 </dl>
 <?php
 }
