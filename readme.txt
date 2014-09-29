@@ -1,6 +1,7 @@
 === Meta Tags fields===
-Contributors: unknown
+Contributors: unknown, and selnomeria
 Donate link: 
+author: selnomeria
 Tags: meta,title,tags,fields
 Requires at least: 3.0
 Tested up to: 3.9
