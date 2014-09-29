@@ -1,13 +1,11 @@
 === Meta Tags fields===
-Contributors: unknown, and selnomeria
-Donate link: 
-author: selnomeria
+Contributors: unknown, selnomeria
+Author: selnomeria
 Tags: meta,title,tags,fields
 Requires at least: 3.0
 Tested up to: 3.9
 Stable tag: 1.0.1
 License: Free
-License URI:  Free
 
 Meta Tags Fields
 
