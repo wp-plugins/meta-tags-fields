@@ -7,7 +7,6 @@ Tested up to: 3.9
 Stable tag: 1.0.1
 License: Free
 
-Meta Tags Fields
 
 == Description ==
 
