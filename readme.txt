@@ -10,7 +10,7 @@ License: Free
 
 == Description ==
 
-Description: PLUGIN ENDED. You can use "YOAST SEO PLUGIN" or etc... If you want to make a CODING for custom titles, then see this post - http://codesphpjs.blogspot.com/2014/09/custom-title-description-keyowrds-for.html 
+PLUGIN ENDED. view better PLUGINS at : http://codesphpjs.blogspot.com/2014/10/must-have-wordpress-plugins.html
 
 
 == Installation ==
