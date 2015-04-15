@@ -7,10 +7,11 @@ Tested up to: 3.9
 Stable tag: 1.0.1
 License: Free
 
+Plugin is discontinued. (VIEW MUST-HAVE PLUGINS FOR EVERYONE: http://bitly.com/MWPLUGINS  )
 
 == Description ==
 
-PLUGIN ENDED. view better PLUGINS at : http://codesphpjs.blogspot.com/2014/10/must-have-wordpress-plugins.html
+Plugin is discontinued. (VIEW MUST-HAVE PLUGINS FOR EVERYONE: http://bitly.com/MWPLUGINS  )
 
 
 == Installation ==

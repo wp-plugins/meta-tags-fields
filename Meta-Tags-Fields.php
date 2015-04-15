@@ -1,8 +1,8 @@
 ﻿<?php
 /*
 Plugin Name: Meta Tags fields
-Description: PLUGIN ENDED. view better PLUGINS at : http://codesphpjs.blogspot.com/2014/10/must-have-wordpress-plugins.html
-Version: 1.3
+Description: Plugin is discontinued. (VIEW MUST-HAVE PLUGINS FOR EVERYONE: http://bitly.com/MWPLUGINS  )
+Version: 1.4
 contributors: selnomeria
 
 Free licence
